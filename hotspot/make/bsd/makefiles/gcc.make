@@ -313,8 +313,10 @@ OPT_CFLAGS/NOOPT=-O0
 
 # Work around some compiler bugs.
 ifeq ($(USE_CLANG), true)
-  OPT_CFLAGS/loopTransform.o += $(OPT_CFLAGS/NOOPT)
-  OPT_CFLAGS/unsafe.o += -O1
+  ifeq ($(shell expr $(CC_VER_MAJOR) = 4 \& $(CC_VER_MINOR) = 2), 1)
+    OPT_CFLAGS/loopTransform.o += $(OPT_CFLAGS/NOOPT)
+    OPT_CFLAGS/unsafe.o += -O1
+  endif
 else
   # 6835796. Problem in GCC 4.3.0 with mulnode.o optimized compilation.
   ifeq ($(shell expr $(CC_VER_MAJOR) = 4 \& $(CC_VER_MINOR) = 3), 1)
@@ -360,15 +362,7 @@ ASFLAGS += -x assembler-with-cpp
 # Linker flags
 
 # statically link libstdc++.so, work with gcc but ignored by g++
-ifeq ($(OS_VENDOR), Darwin)
-  ifeq ($(USE_CLANG), true)
-    STATIC_STDCXX = -Wl,-Bstatic -lc++ -Wl,-Bdynamic
-  else
-    STATIC_STDCXX = -Wl,-Bstatic -lstdc++ -Wl,-Bdynamic
-  endif
-else
-  STATIC_STDCXX = -Wl,-Bstatic -lstdc++ -Wl,-Bdynamic
-endif
+STATIC_STDCXX = -Wl,-Bstatic -lstdc++ -Wl,-Bdynamic
 
 ifeq ($(USE_CLANG),)
   # statically link libgcc and/or libgcc_s, libgcc does not exist before gcc-3.x.

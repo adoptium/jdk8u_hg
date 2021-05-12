@@ -32,7 +32,6 @@
 
 class AbstractDecoder : public CHeapObj<mtInternal> {
 public:
-  virtual ~AbstractDecoder() {}
   // status code for decoding native C frame
   enum decoder_status {
          not_available = -10,  // real decoder is not available
@@ -79,7 +78,7 @@ public:
     _decoder_status = not_available;
   }
 
-  virtual ~NullDecoder() {};
+  ~NullDecoder() {};
 
   virtual bool decode(address pc, char* buf, int buflen, int* offset,
     const char* modulepath = NULL) {
