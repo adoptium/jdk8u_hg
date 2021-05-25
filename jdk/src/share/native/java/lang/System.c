@@ -108,6 +108,12 @@ Java_java_lang_System_identityHashCode(JNIEnv *env, jobject this, jobject x)
         (*env)->DeleteLocalRef(env, jkey);                            \
     } else ((void) 0)
 
+#ifndef VENDOR /* Third party may overwrite this. */
+#define VENDOR "Eclipse Foundation"
+#define VENDOR_URL "https://adoptium.net/"
+#define VENDOR_URL_BUG "https://github.com/adoptium/adoptium-support/issues"
+#endif
+
 /* Third party may overwrite these values. */
 #ifndef VENDOR
 #define VENDOR "Oracle Corporation"
