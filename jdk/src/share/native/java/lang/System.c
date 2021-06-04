@@ -110,6 +110,17 @@ Java_java_lang_System_identityHashCode(JNIEnv *env, jobject this, jobject x)
 
 /* Third party may overwrite these values. */
 #ifndef VENDOR
+#define VENDOR "Eclipse Foundation"
+#endif
+#ifndef VENDOR_URL
+#define VENDOR_URL "https://adoptium.net/"
+#endif
+#ifndef VENDOR_URL_BUG
+#define VENDOR_URL_BUG "https://github.com/adoptium/adoptium-support/issues"
+#endif
+
+/* Third party may overwrite these values. */
+#ifndef VENDOR
 #define VENDOR "Oracle Corporation"
 #endif
 #ifndef VENDOR_URL
