@@ -60,6 +60,7 @@ class ClassPathEntry: public CHeapObj<mtClass> {
   virtual const char* name() = 0;
   virtual bool is_lazy();
   // Constructor
+  ClassPathEntry();
   virtual ~ClassPathEntry() {}
   // Attempt to locate file_name through this class path entry.
   // Returns a class file parsing stream if successfull.
